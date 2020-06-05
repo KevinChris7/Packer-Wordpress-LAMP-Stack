@@ -1,0 +1,67 @@
+
+{
+    "variables": {
+        "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+        "sudo_pwd": "kevin",
+        "project_dir": "/opt/wordpress",
+        "log_folder": "logs",
+        "log_file": "install_service.log"
+
+    },
+
+    "provisioners":[
+        {
+            "type": "shell",
+            "inline": [
+                "sudo mkdir {{user `project_dir`}}",
+                "sudo chown ubuntu:ubuntu {{user `project_dir`}}"
+            ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+            "sudo apt update",
+            "sudo apt upgrade -y",
+            "sudo apt update",
+            "sudo apt install -y apache2"
+            ]
+        },
+        {
+            "type": "shell",
+            "pause_before": "20s",
+            "scripts": [
+                "firewall.sh",
+                "mysql.sh",
+                "php.sh"
+            ],
+            "override": {
+                "amazon-ebs": {
+                    "execute_command": "echo 'ubuntu' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
+                }
+            },
+            "expect_disconnect": "true"
+        },
+
+        {
+            "type": "shell",
+            "inline": [
+                "sudo /etc/init.d/apache2 restart"
+            ]
+        }
+    ],
+    "builders":[
+        {
+            "type": "amazon-ebs",
+            "access_key": "{{user `aws_access_key`}}",
+            "secret_key": "{{user `aws_secret_key`}}",
+            "region": "ap-south-1",
+            "source_ami": "ami-0c5b1a88222ac79cb",
+            "instance_type": "t2.micro",
+            "ssh_keypair_name": "my_ec2_keypair",
+            "ssh_username": "ubuntu",
+            "ami_name": "packer_aws_v1 {{timestamp}}"            
+        }
+
+    ]
+}

@@ -3,7 +3,7 @@
     "variables": {
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-        "sudo_pwd": "kevin",
+        "mysql_rt_password": "admin123K",
         "project_dir": "/opt/wordpress",
         "log_folder": "logs",
         "log_file": "install_service.log"
@@ -33,14 +33,18 @@
             "scripts": [
                 "firewall.sh",
                 "mysql.sh",
-                "php.sh"
+                "php.sh",
+                "wordpress.sh"
             ],
             "override": {
                 "amazon-ebs": {
                     "execute_command": "echo 'ubuntu' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
                 }
             },
-            "expect_disconnect": "true"
+            "expect_disconnect": "true",
+            "environment_vars": [
+                "MYSQL_RT_PASSWORD={{user `mysql_rt_password`}}"
+            ]
         },
 
         {
@@ -58,7 +62,6 @@
             "region": "ap-south-1",
             "source_ami": "ami-0c5b1a88222ac79cb",
             "instance_type": "t2.micro",
-            "ssh_keypair_name": "my_ec2_keypair",
             "ssh_username": "ubuntu",
             "ami_name": "packer_aws_v1 {{timestamp}}"            
         }

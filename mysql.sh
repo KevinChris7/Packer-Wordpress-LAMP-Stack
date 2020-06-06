@@ -49,21 +49,23 @@ echo ${SECURE_MYSQL}
 sudo mysql << EOF   
 use mysql
 SELECT user,authentication_string,plugin,host FROM mysql.user;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin123';
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin123K';
 FLUSH PRIVILEGES;
 EOF
 exit
 
-# Creates Database,Table and User
-echo "$(date +"%d-%b-%Y-%H-%M-%S") | Creating Wordpress Database..."
-mysql -u root -p admin123 << EOF
-use mysql
-CREATE DATABASE IF NOT EXISTS wordpress;
-SHOW DATABASES;
-CREATE USER IF NOT EXISTS 'cjkadmin'@'localhost' IDENTIFIED BY 'cjkadmin';
-SELECT user,host FROM mysql.user
-CREATE TABLE IF NOT EXISTS cjk;
-EOF
-exit 
-
 echo "$(date +%d-%b-%Y-%H-%M-%S") | MySQL Installation and Config Completed!!!"
+
+# # Creates Database,Table and User
+# echo "$(date +"%d-%b-%Y-%H-%M-%S") | Creating Wordpress Database..."
+# mysql -u root -p admin123 << EOF
+# use mysql
+# CREATE DATABASE IF NOT EXISTS wordpress;
+# SHOW DATABASES;
+# CREATE USER IF NOT EXISTS 'cjkadmin'@'localhost' IDENTIFIED BY 'cjkadmin';
+# SELECT user,host FROM mysql.user
+# CREATE TABLE IF NOT EXISTS cjk;
+# EOF
+# exit 
+
+

@@ -49,6 +49,7 @@ Ubuntu WSL
 3.Add the AWS access credentials as Environment Variables
 
 > export AWS_ACCESS_KEY_ID="YOUR ACCESS KEY HERE"
+
 > export AWS_SECRET_ACCESS_KEY="YOUR SECRET ACCESS KEY HERE"
 
 4.Add the JSON file for building the machine images

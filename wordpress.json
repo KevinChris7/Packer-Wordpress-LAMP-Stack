@@ -23,17 +23,17 @@
             "inline": [
             "sudo apt update",
             "sudo apt upgrade -y",
-            "sudo apt update",
-            "sudo apt install -y apache2"
+            "sudo apt update"
             ]
         },
         {
             "type": "shell",
             "pause_before": "20s",
             "scripts": [
-                "firewall.sh",
-                "mysql.sh",
-                "php.sh"
+                "./bash-scripts/apache.sh",
+                "./bash-scripts/firewall.sh",
+                "./bash-scripts/mysql.sh",
+                "./bash-scripts/php.sh"
             ],
             "override": {
                 "amazon-ebs": {
@@ -47,7 +47,7 @@
         },
         {
             "type": "shell",
-            "script": "wordpress.sh",
+            "script": "./bash-scripts/wordpress.sh",
             "override": {
                 "amazon-ebs": {
                     "execute_command": "echo 'root' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"

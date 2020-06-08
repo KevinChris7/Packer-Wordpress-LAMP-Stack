@@ -21,10 +21,10 @@ expect \"Press y|Y for Yes, any other key for No:\"
 send \"n\r\"
 
 expect \"New password:\"
-send \"admin7K1\r\"
+send \"$MYSQL_RT_PASSWORD\r\"
 
 expect \"Re-enter new password:\"
-send \"admin7K1\r\"
+send \"$MYSQL_RT_PASSWORD\r\"
 
 expect \"Remove anonymous users? (Press y|Y for Yes, any other key for No) :\"
 send \"y\r\"

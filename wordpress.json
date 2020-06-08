@@ -3,10 +3,16 @@
     "variables": {
         "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
         "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
-        "mysql_rt_password": "admin123K",
+        "mysql_rt_username": "root",
+        "mysql_rt_password": "admin7K1",
+        "admin_username": "cjkadmin",
+        "admin_password": "w0rdPress7q!",
         "project_dir": "/opt/wordpress",
         "log_folder": "logs",
-        "log_file": "install_service.log"
+        "log_file": "install_service.log",
+        "wordpress_db_name": "wordpress",
+        "table_name": "cjk"
+        
 
     },
 
@@ -42,7 +48,12 @@
             },
             "expect_disconnect": "true",
             "environment_vars": [
-                "MYSQL_RT_PASSWORD={{user `mysql_rt_password`}}"
+                "MYSQL_RT_USERNAME={{user `mysql_rt_username`}}",
+                "MYSQL_RT_PASSWORD={{user `mysql_rt_password`}}",
+                "WORDPRESS_DB_NAME={{user `wordpress_db_name`}}",
+                "ADMIN_USERNAME={{user `admin_username`}}",
+                "ADMIN_PASSWORD={{user `admin_password`}}",
+                "TABLE_NAME={{user `table_name`}}"
             ]
         },
         {

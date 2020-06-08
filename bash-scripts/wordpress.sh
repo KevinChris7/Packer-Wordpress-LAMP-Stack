@@ -2,16 +2,16 @@
 
 echo "$(date +"%d-%b-%Y-%H-%M-%S") | Creating Wordpress Database..."
 
-CREATE_DB="create database wordpress;
-GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'localhost' IDENTIFIED BY 'admin7K1';
+CREATE_DB="create database $WORDPRESS_DB_NAME;
+GRANT ALL PRIVILEGES ON wordpress.* TO '$MYSQL_RT_USERNAME'@'localhost' IDENTIFIED BY '$MYSQL_RT_PASSWORD';
 FLUSH PRIVILEGES;
 SHOW DATABASES;
-CREATE USER IF NOT EXISTS 'cjkadmin'@'localhost' IDENTIFIED BY 'w0rdPress7q!';
-GRANT ALL ON wordpress.* TO 'cjkadmin'@'localhost' IDENTIFIED BY 'w0rdPress7q!';
+CREATE USER IF NOT EXISTS '$ADMIN_USERNAME'@'localhost' IDENTIFIED BY '$ADMIN_PASSWORD';
+GRANT ALL ON wordpress.* TO '$ADMIN_USERNAME'@'localhost' IDENTIFIED BY '$ADMIN_PASSWORD';
 FLUSH PRIVILEGES;
 SELECT user,host FROM mysql.user;
-CREATE TABLE IF NOT EXISTS cjk;"
-mysql -u root --password=admin7K1 -e "$CREATE_DB"
+CREATE TABLE IF NOT EXISTS $TABLE_NAME;"
+mysql -u $MYSQL_RT_USERNAME --password=$MYSQL_RT_PASSWORD -e "$CREATE_DB"
 
 
 echo "$(date +"%d-%b-%Y-%H-%M-%S") | Downloading Wordpress...."

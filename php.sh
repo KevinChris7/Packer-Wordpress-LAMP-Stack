@@ -12,5 +12,8 @@ $sed -i 's/index.html/index.php' ../etc/apache2/mods-enabled/dir.conf
 
 cat > dir.conf
 
-echo "$(date +"%d-%b-%Y-%H-%M-%S") | Installing Additiona PHP Packages...."
+echo "$(date +"%d-%b-%Y-%H-%M-%S") | Installing Additional PHP Packages...."
 apt install -y php-cli php-curl php-gd php-mbstring php-xml php-xmlrpc
+
+
+

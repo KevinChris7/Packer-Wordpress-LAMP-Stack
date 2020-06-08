@@ -21,10 +21,10 @@ expect \"Press y|Y for Yes, any other key for No:\"
 send \"n\r\"
 
 expect \"New password:\"
-send \"admin\r\"
+send \"admin7K1\r\"
 
 expect \"Re-enter new password:\"
-send \"admin\r\"
+send \"admin7K1\r\"
 
 expect \"Remove anonymous users? (Press y|Y for Yes, any other key for No) :\"
 send \"y\r\"
@@ -44,28 +44,5 @@ expect EOF
 
 echo ${SECURE_MYSQL}
 
-#To log in to the MySQL server as the root user type
-#EOF refers following are sql commands
-sudo mysql << EOF   
-use mysql
-SELECT user,authentication_string,plugin,host FROM mysql.user;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin123K';
-FLUSH PRIVILEGES;
-EOF
-exit
 
-echo "$(date +%d-%b-%Y-%H-%M-%S") | MySQL Installation and Config Completed!!!"
-
-# # Creates Database,Table and User
-# echo "$(date +"%d-%b-%Y-%H-%M-%S") | Creating Wordpress Database..."
-# mysql -u root -p admin123 << EOF
-# use mysql
-# CREATE DATABASE IF NOT EXISTS wordpress;
-# SHOW DATABASES;
-# CREATE USER IF NOT EXISTS 'cjkadmin'@'localhost' IDENTIFIED BY 'cjkadmin';
-# SELECT user,host FROM mysql.user
-# CREATE TABLE IF NOT EXISTS cjk;
-# EOF
-# exit 
-
-
+echo "$(date +"%d-%b-%Y-%H-%M-%S") | MySQL Installation Completed!!!!!"

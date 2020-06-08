@@ -33,8 +33,7 @@
             "scripts": [
                 "firewall.sh",
                 "mysql.sh",
-                "php.sh",
-                "wordpress.sh"
+                "php.sh"
             ],
             "override": {
                 "amazon-ebs": {
@@ -45,6 +44,15 @@
             "environment_vars": [
                 "MYSQL_RT_PASSWORD={{user `mysql_rt_password`}}"
             ]
+        },
+        {
+            "type": "shell",
+            "script": "wordpress.sh",
+            "override": {
+                "amazon-ebs": {
+                    "execute_command": "echo 'root' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
+                }
+            }
         },
 
         {

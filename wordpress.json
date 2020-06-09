@@ -49,11 +49,7 @@
             "expect_disconnect": "true",
             "environment_vars": [
                 "MYSQL_RT_USERNAME={{user `mysql_rt_username`}}",
-                "MYSQL_RT_PASSWORD={{user `mysql_rt_password`}}",
-                "WORDPRESS_DB_NAME={{user `wordpress_db_name`}}",
-                "ADMIN_USERNAME={{user `admin_username`}}",
-                "ADMIN_PASSWORD={{user `admin_password`}}",
-                "TABLE_NAME={{user `table_name`}}"
+                "MYSQL_RT_PASSWORD={{user `mysql_rt_password`}}"
             ]
         },
         {
@@ -63,7 +59,15 @@
                 "amazon-ebs": {
                     "execute_command": "echo 'root' | sudo -S sh -c '{{ .Vars }} {{ .Path }}'"
                 }
-            }
+            },
+            "environment_vars": [
+                "MYSQL_RT_USERNAME={{user `mysql_rt_username`}}",
+                "MYSQL_RT_PASSWORD={{user `mysql_rt_password`}}",
+                "WORDPRESS_DB_NAME={{user `wordpress_db_name`}}",
+                "ADMIN_USERNAME={{user `admin_username`}}",
+                "ADMIN_PASSWORD={{user `admin_password`}}",
+                "TABLE_NAME={{user `table_name`}}"
+            ]
         },
 
         {

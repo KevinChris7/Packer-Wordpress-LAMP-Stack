@@ -1,16 +1,30 @@
 pipeline{
     agent any
+    environment{
+        access_key = credentials("")
+        secret_key = credentials("")
+    }
     stages{
+        stage("Build"){
+            sh '''
+                npm install
+            '''
+        }
         stage("Validate"){
             steps{
-            packer validate wordpress.json
-            echo "Packer Template Validated Successfully"
+                sh 'packer validate wordpress.json'
+                echo "Packer Template Validated Successfully"
             }
         }
         stage("Dev"){
             steps{
-            packer build wordpress.json
-            echo "Packer Build Completed"
+                withCredentials([
+                    credentialsId: 'f140b66d-9ea9-4318-b186-f04018811576',
+                    usernameVariable: 'AWS_KEY',
+                    passwordVariable: 'AWS_SECRET'
+                ])
+                sh 'packer build -var aws_access_key=${AWS_KEY} aws_secret_key=${AWS_SECRET} wordpress.json'
+                echo "Packer Build Completed"
             }
         }
     }

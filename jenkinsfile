@@ -2,12 +2,16 @@ pipeline{
     agent any
     stages{
         stage("Validate"){
+            steps{
             packer validate wordpress.json
             echo "Packer Template Validated Successfully"
+            }
         }
         stage("Dev"){
+            steps{
             packer build wordpress.json
             echo "Packer Build Completed"
+            }
         }
     }
 }

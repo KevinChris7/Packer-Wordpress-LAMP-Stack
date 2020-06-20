@@ -65,7 +65,7 @@ Ubuntu WSL
 
 6.To Validate the packer template file
 
-> packer validate wordpress,json
+> packer validate wordpress.json
 
 7.To Build the packer template file
 
